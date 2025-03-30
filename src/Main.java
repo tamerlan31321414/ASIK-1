@@ -1,174 +1,157 @@
-// Time complexity O(n) and space complexity O(n)
-public class Main {
-    public static int getMinimum(int[] arr, int index) {
-        if (index == 0) return arr[0];
-        int min = getMinimum(arr, index - 1);
+// time complexity O(n) and space complexity O(n)
+public class MinFinder {
+    public static int findMin(int[] arr, int index) {
+        if (index == 0)
+            return arr[0];
+        int min = findMin(arr, index - 1);
         return Math.min(min, arr[index]);
     }
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
         int[] arr = new int[n];
 
         for (int i = 0; i < n; i++) {
-            arr[i] = sc.nextInt();
+            arr[i] = scanner.nextInt();
         }
 
-        System.out.println(getMinimum(arr, n - 1));
+        System.out.println(findMin(arr, n - 1));
     }
 }
-
-// Time complexity O(n) and space complexity O(n)
-public class AverageCalculator {
-    public static double calculateAverage(int[] arr, int n) {
+// time complexity O(n) and space complexity O(n)
+public class AverageFinder {
+    public static double findAverage(int[] arr, int n) {
         if (n == 1) return arr[0];
-        return (arr[n - 1] + (n - 1) * calculateAverage(arr, n - 1)) / n;
+        return (arr[n - 1] + (n - 1) * findAverage(arr, n - 1)) / n;
     }
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
         int[] arr = new int[n];
 
         for (int i = 0; i < n; i++) {
-            arr[i] = sc.nextInt();
+            arr[i] = scanner.nextInt();
         }
 
-        System.out.println(calculateAverage(arr, n));
-        sc.close();
+        System.out.println(findAverage(arr, n));
+        scanner.close();
     }
 }
+// time complexity O(n^(1/2)) and space complexity O(n^(1/2))
+public class PrimeChecker {
+    public static boolean isPrime(int n, int i) {
+        if (n <= 1)
+            return false;
+        if (i * i > n)
+            return true;
+        if (n % i == 0)
+            return false;
 
-// Time complexity O(sqrt(n)) and space complexity O(sqrt(n))
-public class PrimeValidator {
-    public static boolean checkPrime(int n, int i) {
-        if (n <= 1) return false;
-        if (i * i > n) return true;
-        if (n % i == 0) return false;
-        return checkPrime(n, i + 1);
+        return isPrime(n, i + 1);
     }
 
     public static void main(String[] args) {
         int n = 7;
-        if (checkPrime(n, 2)) System.out.println("Prime");
+        if (isPrime(n, 2)) System.out.println("Prime");
         else System.out.println("Composite");
     }
 }
 
-// Time complexity O(n) and space complexity O(n)
-public class IterativeFactorial {
-    public static int calculateFactorial(int n) {
-        int result = 1;
-        for (int i = 1; i <= n; i++) {
-            result *= i;
-        }
-        return result;
+// time complexity O(n) and space complexity O(n)
+public class Factorial {
+    public static int factorial(int n) {
+        if (n == 0)
+            return 1;
+
+        return n * factorial(n - 1);
     }
 
     public static void main(String[] args) {
-        System.out.println(calculateFactorial(5));
+        System.out.println(factorial(5));
     }
 }
 
-// Time complexity O(n) and space complexity O(n)
-public class FibonacciIterative {
-    public static int fibonacciIterative(int n) {
-        if (n == 0) return 0;
-        if (n == 1) return 1;
-        int a = 0, b = 1;
-        for (int i = 2; i <= n; i++) {
-            int temp = a + b;
-            a = b;
-            b = temp;
-        }
-        return b;
+// time complexity O(n^2) and space complexity O(n)
+public class Fibonacci {
+    public static int fibonacci(int n) {
+        if (n == 0)
+            return 0;
+        if (n == 1)
+            return 1;
+        return fibonacci(n - 1) + fibonacci(n - 2);
     }
 
     public static void main(String[] args) {
-        System.out.println(fibonacciIterative(5));
-        System.out.println(fibonacciIterative(17));
+        System.out.println(fibonacci(5)); // 5
+        System.out.println(fibonacci(17)); // 1597
     }
 }
-
-// Time complexity O(log(n)) and space complexity O(log(n))
-public class OptimizedPowerCalculator {
-    public static int optimizedPower(int a, int n) {
-        if (n == 0) return 1;
-        if (n % 2 == 0) {
-            int half = optimizedPower(a, n / 2);
-            return half * half;
-        } else {
-            return a * optimizedPower(a, n - 1);
-        }
+// time complexity O(n) and space complexity O(n)
+public class PowerCalculator {
+    public static int power(int a, int n) {
+        if (n == 0)
+            return 1;
+        return a * power(a, n - 1);
     }
 
     public static void main(String[] args) {
-        System.out.println(optimizedPower(2, 10));
+        System.out.println(power(2, 10));
     }
 }
-
-// Time complexity O(n!) and space complexity O(n)
-public class StringPermutations {
-    public static void generatePermutations(String str, String result) {
-        if (str.isEmpty()) {
+// time complexity O(n!) and space complexity O(n)
+public class Permutations {
+    public static void permute(String str, String result) {
+        if (str.length() == 0) {
             System.out.println(result);
             return;
         }
         for (int i = 0; i < str.length(); i++) {
-            generatePermutations(str.substring(0, i) + str.substring(i + 1), result + str.charAt(i));
+            permute(str.substring(0, i) + str.substring(i + 1), result + str.charAt(i));
         }
     }
 
     public static void main(String[] args) {
-        generatePermutations("IOX", "");
+        permute("IOX", "");
     }
 }
-
-// Time complexity O(n!) and space complexity O(n)
-public class DigitsOnlyChecker {
-    public static boolean isOnlyDigits(String s, int index) {
-        if (index == s.length()) return true;
-        if (!Character.isDigit(s.charAt(index))) return false;
-        return isOnlyDigits(s, index + 1);
+// time complexity O(n!) and space complexity O(n)
+public class DigitChecker {
+    public static boolean isAllDigits(String s, int index) {
+        if (index == s.length())
+            return true;
+        if (!Character.isDigit(s.charAt(index)))
+            return false;
+        return isAllDigits(s, index + 1);
     }
 
     public static void main(String[] args) {
-        System.out.println(isOnlyDigits("123456", 0));
+        System.out.println(isAllDigits("123456", 0));
     }
 }
-
-// Time complexity O(n) and space complexity O(n)
-public class BinomialCoefficientDP {
+// time complexity O(2^n) and space complexity O(n)
+public class BinomialCoefficient {
     public static int binomial(int n, int k) {
-        int[][] dp = new int[n + 1][k + 1];
-        for (int i = 0; i <= n; i++) {
-            for (int j = 0; j <= Math.min(i, k); j++) {
-                if (j == 0 || j == i) dp[i][j] = 1;
-                else dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j];
-            }
-        }
-        return dp[n][k];
+        if (k == 0 || k == n)
+            return 1;
+        return binomial(n - 1, k - 1) + binomial(n - 1, k);
     }
 
     public static void main(String[] args) {
         System.out.println(binomial(7, 3));
     }
 }
-
-// Time complexity O(log(n)) and space complexity O(log(n))
-public class IterativeGCD {
-    public static int iterativeGcd(int a, int b) {
-        while (b != 0) {
-            int temp = b;
-            b = a % b;
-            a = temp;
-        }
-        return a;
+// time complexity O(log(n)) and space complexity O(log(n))
+public class GCD {
+    public static int gcd(int a, int b) {
+        if (b == 0)
+            return a;
+        return gcd(b, a % b);
     }
 
     public static void main(String[] args) {
-        System.out.println(iterativeGcd(32, 48));
-        System.out.println(iterativeGcd(10, 7));
+        System.out.println(gcd(32, 48)); // 16
+        System.out.println(gcd(10, 7)); // 1
     }
 }
